@@ -1,15 +1,15 @@
 
 from utils.arguments import parse_arguments
-from utils.filestools import get_folder_paths_in_path, get_file_count_by_type, get_file_paths_in_paths
+from utils.searchtools import get_folders_in_path, get_files_in_path
+from utils.filetools import get_all_files_metadata, get_file_count_by_type 
     
-args = parse_arguments ()
-folder_paths = get_folder_paths_in_path(args.path, args.recursive)
-file_paths = get_file_paths_in_paths(args.path, args.recursive)
-file_counts_by_type = get_file_count_by_type(file_paths)
 
-# print("arguments:\r\n\tpath: {}\r\n\trecursive: {}\n".format(args.path, args.recursive))
-# print ("Folders to scan ({}):\r\n\t{}\n".format(len(folder_paths),'\r\n\t'.join(folder_paths)))
-# print ("Files to scan ({}):\r\n\t{}\n".format(len(file_paths),'\r\n\t'.join(file_paths)))
-# print ("file_counts_by_type :\r\n\t{}".format(file_counts_by_type))
-print ("Folders to scan ({}):\r\n\t".format(len(folder_paths)))
-print ("Files to scan ({}):\r\n\t".format(len(file_paths)))
+def main():
+
+  args = parse_arguments ()
+  files_metadada = get_all_files_metadata(args.path, args.recursive)
+
+  print ("Files metadata ({}):\r\n\t".format(files_metadada))
+
+if __name__ == "__main__":
+  main()
