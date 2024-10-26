@@ -7,11 +7,11 @@
 ## 2. using **pip** with virtual environments
 - install python3-venv
 ```
-apt install python3.10-ven
+apt install python3.10-venv
 ```
 - execute the following command to create a virtual environment
 ```
-python -m venv venv
+python3 -m venv venv
 ```
 
 ### a. activate virtual environment

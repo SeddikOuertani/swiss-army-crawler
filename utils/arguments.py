@@ -11,6 +11,7 @@ def parse_arguments () -> argparse.Namespace:
 
   parser = argparse.ArgumentParser(description="this tool helps you navigate metadata for files in a folder tree")
 
+  # defins the path of the search
   parser.add_argument(
     "-p",
     "--path", 
@@ -19,6 +20,7 @@ def parse_arguments () -> argparse.Namespace:
     help="path of folder to inspect"
   )
 
+  # defines if the scan is recursive or not
   parser.add_argument(
     "-r", 
     "--recursive",
@@ -27,7 +29,17 @@ def parse_arguments () -> argparse.Namespace:
     help="inspect folder recursively"
   )
 
-  
+  # defines depth of search tree
+  parser.add_argument(
+    "-d", 
+    "--depth",
+    type=int,
+    default=-1,
+    help="files or folders to exclude, requires --path",
+    required=False
+  )
+
+  # defines folders to exclude from scan
   parser.add_argument(
     "-x", 
     "--exclude",

@@ -1,16 +1,6 @@
 from pathlib import Path
 import magic
-
-def check_starting_parameters_validity (dir_path: str, depth: int= -1, excluded_directories: list[str] = []) -> bool:
-  if depth < -1:
-    raise Exception("Please make sure depth is 0 or higher")
-
-  p = Path(dir_path).resolve()
-  if p.is_dir() == False:
-    raise Exception("Please make sure that you provide a valid directory path")
-
-  if isinstance(excluded_directories, list) == False: 
-    raise Exception("Please make sure that the excluded directories is a list of strings")
+from .misctools import check_starting_parameters_validity
 
 def get_folders_in_path (dir_path: str, is_recursive: bool = False, depth: int= -1, excluded_directories: list[str] = []) -> list[str] :
   """
@@ -35,17 +25,14 @@ def get_folders_in_path (dir_path: str, is_recursive: bool = False, depth: int= 
 
   if is_recursive == False: 
     return [folder.as_posix() for folder in p.iterdir() if folder.is_dir()]
-  
-  for file_path in p.rglob('*'):
-    # eliminate non directories files
-    if file_path.is_dir() == False:
+
+  for file_path in [fp for fp in p.rglob('*') if fp.is_dir()]:
+
+    # Skip paths that exceed the specified depth, unless no depth is specified
+    current_depth = len(file_path.relative_to(p.as_posix()).parts) - 1
+    if depth != -1 and current_depth > depth:
       continue
 
-    current_depth = len(file_path.relative_to(p.as_posix()).parts) - 1
-    # Skip paths that exceed the specified depth, unless no depth is specified
-    if depth != -1 and current_depth > depth:
-      break
-    
     # skips paths that are in the exclusion list
     if len(excluded_directories) > 0 and any(excluded_dir in file_path.parts for excluded_dir in excluded_directories):
       continue
@@ -87,6 +74,8 @@ def get_files_in_path (dir_path: str, is_recursive: bool = False, depth: int = -
   Returns:
     list[str]: A list containing the paths of all the files found 
   """
+
+  check_starting_parameters_validity(dir_path, depth, excluded_directories)
 
   folder_paths = get_folders_in_path(dir_path, is_recursive, depth, excluded_directories)
   file_paths = []
