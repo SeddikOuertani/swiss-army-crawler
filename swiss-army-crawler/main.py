@@ -1,6 +1,6 @@
 import csv
 from utils.arguments import parse_arguments
-from utils.scantools import get_all_files_metadata, get_file_count_by_type
+from utils.scantools import get_all_files_metadata
 from utils.loggintools import Logger, LOGLEVELS
 
 # Initialize the singleton logger

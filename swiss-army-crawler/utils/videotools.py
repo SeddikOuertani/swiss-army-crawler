@@ -1,6 +1,6 @@
 from pathlib import Path
 import ffmpeg
-from .loggintools import Logger, LOGLEVELS
+from .loggintools import Logger
 from .misctools import get_current_function_info
 
 logger = Logger()
@@ -31,5 +31,5 @@ def get_video_file_metadata(file_path: Path) -> dict:
     return metadata
   except BaseException as e:
     module_name, function_name = get_current_function_info()
-    logger.log(e, LOGLEVELS.ERROR, module_name=module_name, function_name=function_name, err_file=file_path.as_posix())
+    logger.error(e, module_name=module_name, function_name=function_name, err_file=file_path.as_posix())
     return {}

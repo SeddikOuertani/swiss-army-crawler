@@ -26,6 +26,7 @@ class Logger(metaclass=SingletonMeta):
     if level.value >= self.level.value:  # Only log if level is sufficient
         formatted_message = self._format_message(error_message, level, module_name, function_name, err_file)
         self._output(formatted_message)
+        print(error_message)
 
   def _format_message(self, message: str, level: LOGLEVELS,  module_name: str = None, function_name: str = None, err_file: str = None) -> str:
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
