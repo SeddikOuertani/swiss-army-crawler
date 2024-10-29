@@ -4,7 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-python-dotenv = "1.0.1"
+pathlib = "==1.0.1"
+argparse = "==1.4.0"
+python-magic = "==0.4.27"
+pillow = "==11.0.0"
+exifread = "==3.0.0"
+langdetect = "==1.0.9"
+python-dotenv = "==1.0.1"
+ffmpeg-python = "==0.2.0"
 
 [dev-packages]
 
