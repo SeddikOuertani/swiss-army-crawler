@@ -1,4 +1,9 @@
 import argparse
+from .. import Logger, LOGLEVELS
+
+module_name = "logging_module"
+logger = Logger(LOGLEVELS.DEBUG, log_to_file=True)
+
 def parse_arguments () -> argparse.Namespace:
   """
   parse_arguments () -> Namespace
@@ -9,8 +14,10 @@ def parse_arguments () -> argparse.Namespace:
     Namespace: 
   """
 
-  parser = argparse.ArgumentParser(description="this tool helps you navigate metadata for files in a folder tree")
+  logger.info('Parsing arguments')
 
+  parser = argparse.ArgumentParser(description="this tool helps you navigate metadata for files in a folder tree")
+  
   # defins the path of the search
   parser.add_argument(
     "-p",
