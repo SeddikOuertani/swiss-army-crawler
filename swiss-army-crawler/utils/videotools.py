@@ -1,7 +1,6 @@
 from pathlib import Path
 import ffmpeg
-from .loggintools import Logger
-from .misctools import get_current_function_info
+from .. import Logger, get_current_function_info
 
 logger = Logger()
 

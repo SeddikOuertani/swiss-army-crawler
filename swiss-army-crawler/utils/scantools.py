@@ -3,11 +3,7 @@ import grp
 import os
 import magic
 from pathlib import Path 
-from .texttools import get_text_file_metadata
-from .probetools import get_file_format, get_files_in_path 
-from .misctools import check_starting_parameters_validity
-from .imagetools import get_image_file_metadata
-from .videotools import get_video_file_metadata
+from .. import get_text_file_metadata,  get_file_format, get_files_in_path, check_starting_parameters_validity,  get_image_file_metadata,  get_video_file_metadata
 
 module_name  = 'scantools'
 

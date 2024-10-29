@@ -1,8 +1,5 @@
 import csv
-from utils.arguments import parse_arguments
-from utils.scantools import get_all_files_metadata
-from utils.loggintools import Logger, LOGLEVELS
-
+from . import Logger, LOGLEVELS, parse_arguments, get_all_files_metadata
 # Initialize the singleton logger
 logger = Logger(level=LOGLEVELS.DEBUG, log_to_file=True)
 

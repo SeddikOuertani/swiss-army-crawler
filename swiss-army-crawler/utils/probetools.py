@@ -1,6 +1,6 @@
 from pathlib import Path
 import magic
-from .misctools import check_starting_parameters_validity
+from .. import check_starting_parameters_validity
 
 def get_folders_in_path (dir_path: str, is_recursive: bool = False, depth: int= -1, excluded_directories: list[str] = []) -> list[str] :
   """
