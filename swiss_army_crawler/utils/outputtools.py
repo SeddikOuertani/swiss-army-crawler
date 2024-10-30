@@ -1,15 +1,17 @@
 import csv
-from .. import Logger, LOGLEVELS
+from .loggingtools import Logger, LOGLEVELS
 
 module_name = "output_module"
 logger = Logger(LOGLEVELS.DEBUG, log_to_file=True)
 
 def export_metadata (files_metadata: list[dict]) -> None:
+
+  logger.info("exporting data ...")
   
   field_names = list(set([key for file_metadata in files_metadata for key in file_metadata.keys()]))
-  text_files_metadata = [file for file in files_metadata if file['type'].startsWith('image')]
-  image_files_metadata = [file for file in files_metadata if file['type'].startsWith('text')]
-  video_files_metadata = [file for file in files_metadata if file['type'].startsWith('video')]
+  text_files_metadata = [file for file in files_metadata if file['type'].startswith('text')]
+  image_files_metadata = [file for file in files_metadata if file['type'].startswith('image')]
+  video_files_metadata = [file for file in files_metadata if file['type'].startswith('video')]
   text_field_names = list(set([key for file_metadata in text_files_metadata for key in file_metadata.keys()]))
   image_field_names = list(set([key for file_metadata in image_files_metadata for key in file_metadata.keys()]))
   video_field_names = list(set([key for file_metadata in video_files_metadata for key in file_metadata.keys()]))

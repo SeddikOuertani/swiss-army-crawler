@@ -1,5 +1,5 @@
 import argparse
-from .. import Logger, LOGLEVELS
+from .loggingtools import Logger, LOGLEVELS
 
 module_name = "logging_module"
 logger = Logger(LOGLEVELS.DEBUG, log_to_file=True)
@@ -14,7 +14,7 @@ def parse_arguments () -> argparse.Namespace:
     Namespace: 
   """
 
-  logger.info('Parsing arguments')
+  logger.info('Parsing arguments ...')
 
   parser = argparse.ArgumentParser(description="this tool helps you navigate metadata for files in a folder tree")
   
