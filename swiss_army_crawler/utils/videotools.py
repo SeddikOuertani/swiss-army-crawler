@@ -19,7 +19,7 @@ def get_video_file_metadata(file_path: Path) -> dict:
   """
   metadata = {}
   try:
-    probe = ffmpeg.probe(filename=file_path.as_posix(), cmd="azeaze")
+    probe = ffmpeg.probe(filename=file_path.as_posix())
     video_stream = next((stream for stream in probe['streams'] if stream['codec_type'] == 'video'), None)
     metadata = {
         'width': video_stream['width'],

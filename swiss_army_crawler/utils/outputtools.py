@@ -9,8 +9,8 @@ def export_metadata (files_metadata: list[dict]) -> None:
   logger.info("exporting data ...")
   
   field_names = list(set([key for file_metadata in files_metadata for key in file_metadata.keys()]))
-  text_files_metadata = [file for file in files_metadata if file['type'].startswith('image')]
-  image_files_metadata = [file for file in files_metadata if file['type'].startswith('text')]
+  text_files_metadata = [file for file in files_metadata if file['type'].startswith('text')]
+  image_files_metadata = [file for file in files_metadata if file['type'].startswith('image')]
   video_files_metadata = [file for file in files_metadata if file['type'].startswith('video')]
   text_field_names = list(set([key for file_metadata in text_files_metadata for key in file_metadata.keys()]))
   image_field_names = list(set([key for file_metadata in image_files_metadata for key in file_metadata.keys()]))
