@@ -1,4 +1,3 @@
-import csv
 from . import Logger, LOGLEVELS, parse_arguments, get_all_files_metadata, export_metadata
 # Initialize the singleton logger
 logger = Logger(level=LOGLEVELS.DEBUG, log_to_file=True)
