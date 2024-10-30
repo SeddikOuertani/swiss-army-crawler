@@ -16,7 +16,7 @@ setup(
       ],
     entry_points={
       'console_scripts': [
-        'swiss=swiss_army_crawler.main:main',
+        'swiss=swiss_army_crawler.__main__:main',
       ],
     },
     author='Mohamed Seddik OUERTANI',

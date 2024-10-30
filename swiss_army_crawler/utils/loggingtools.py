@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import enum
 import datetime
-from .. import SingletonMeta
+from .misctools import SingletonMeta
 
 load_dotenv()
 

@@ -3,9 +3,15 @@ import grp
 import os
 import magic
 from pathlib import Path 
-from .. import get_text_file_metadata,  get_file_format, get_files_in_path, check_starting_parameters_validity,  get_image_file_metadata,  get_video_file_metadata
+import magic
+from .texttools import get_text_file_metadata 
+from .probetools import get_files_in_path, check_starting_parameters_validity
+from .imagetools import get_image_file_metadata  
+from .videotools import get_video_file_metadata
+from .loggingtools import Logger, LOGLEVELS
 
 module_name  = 'scantools'
+logger = Logger(LOGLEVELS.DEBUG, log_to_file=True)
 
 def get_file_count_by_type (dir_path: str, is_recursive: bool = False, depth: int = -1, excluded_directories: list[str] = []) -> str:
   """
@@ -83,7 +89,7 @@ def get_all_files_metadata(dir_path: str, is_recursive: bool = False, depth: int
   ### Returns:
     dict: contains file info (name, size, last update date, creation date, etc...) 
   """
-  
+  logger.info("Starting scan ...")
   all_files = get_files_in_path(dir_path, is_recursive, depth, excluded_directories)
   all_metadata = []
 
@@ -123,3 +129,20 @@ def get_file_general_info(file_path: Path) -> dict:
   metadata["group_name"] = grp.getgrgid(file_stat.st_gid).gr_name  # Group name
   metadata["permissions"] = oct(file_stat.st_mode)[-3:]  # Permissions in octal format (e.g., '644')
   return metadata
+
+
+def get_file_format (file_path: str) -> str:
+  """
+  get_file_format (file_path) -> str
+
+  Returns the format of file in `file_path`
+
+  Args:
+    file_path (str): the path of the file to scan.
+
+  Returns:
+    str: the MIME type of the file
+  """
+
+  return magic.from_file(file_path)
+  

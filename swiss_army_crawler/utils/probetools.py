@@ -1,6 +1,6 @@
 from pathlib import Path
-import magic
-from .. import check_starting_parameters_validity, Logger, LOGLEVELS
+from .misctools import check_starting_parameters_validity 
+from .loggingtools import Logger, LOGLEVELS
 
 module_name = 'probing_module'
 logger = Logger(LOGLEVELS.DEBUG, log_to_file=True)
@@ -78,7 +78,7 @@ def get_files_in_path (dir_path: str, is_recursive: bool = False, depth: int = -
   Returns:
     list[str]: A list containing the paths of all the files found 
   """
-  logger.info('Getting all file paths to scan...')
+  logger.info('Getting all file paths to scan ...')
   check_starting_parameters_validity(dir_path, depth, excluded_directories)
 
   folder_paths = get_folders_in_path(dir_path, is_recursive, depth, excluded_directories)
@@ -87,19 +87,4 @@ def get_files_in_path (dir_path: str, is_recursive: bool = False, depth: int = -
     file_paths.extend(get_files_paths_in_directory(folder_path))
   return file_paths
 
-def get_file_format (file_path: str) -> str:
-  """
-  get_file_format (file_path) -> str
-
-  Returns the format of file in `file_path`
-
-  Args:
-    file_path (str): the path of the file to scan.
-
-  Returns:
-    str: the MIME type of the file
-  """
-
-  return magic.from_file(file_path)
-  
 
