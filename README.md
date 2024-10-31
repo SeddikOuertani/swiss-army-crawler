@@ -1,4 +1,4 @@
-Project Title: swiss_army_crawler
+## **swiss_army_crawler**
 
 ### Description: 
 This project, swiss_army_crawler, is designed to extract metadata from various file types, including video, text, and image files. The goal is to provide users with a comprehensive tool that simplifies the retrieval and management of essential information contained within these files.
