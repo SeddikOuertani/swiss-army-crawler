@@ -64,5 +64,3 @@ def configure():
         json.dump(settings, config_file, indent=4)
     
     print(f"Configuration saved to {config_file_path}")
-
-configure()
