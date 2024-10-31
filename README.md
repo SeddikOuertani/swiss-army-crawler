@@ -22,14 +22,14 @@ swiss --path /path/to/files --recursive --depth 3 --exclude folder1 folder2
 Python 3.x
 
 ### Required libraries: 
-pathlib==1.0.1
-argparse==1.4.0
-python-magic==0.4.27
-Pillow==11.0.0
-ExifRead==3.0.0
-langdetect==1.0.9
-python-dotenv==1.0.1
-ffmpeg-python==0.2.0
+ - pathlib==1.0.1
+ - argparse==1.4.0
+ - python-magic==0.4.27
+ - Pillow==11.0.0
+ - ExifRead==3.0.0
+ - langdetect==1.0.9
+ - python-dotenv==1.0.1
+ - ffmpeg-python==0.2.0
 
 ### License:
 This project is licensed under the MIT License.
