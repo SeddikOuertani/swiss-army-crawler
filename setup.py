@@ -1,8 +1,21 @@
 from setuptools import setup, find_packages
+from setuptools.command.install import install
+import subprocess
+import sys 
+
+class InstallConfigs(install):
+    """Custom installation to run configuration script after install."""
+    
+    def run(self):
+        install.run(self)
+        
+        print("Running configuration script...")
+        subprocess.check_call([sys.executable,'-m', 'swiss_army_crawler.configure', 'configure'])
+    
 
 setup(
     name='swiss-army-crawler',  # Replace with your package name
-    version='0.1',
+    version='0.1.0',
     packages=find_packages(),
     install_requires=[
       "pathlib==1.0.1",
@@ -14,6 +27,9 @@ setup(
       "python-dotenv==1.0.1",
       "ffmpeg-python==0.2.0"
       ],
+    cmdclass={
+      "install": InstallConfigs  
+    },
     entry_points={
       'console_scripts': [
         'swiss=swiss_army_crawler.__main__:main',
