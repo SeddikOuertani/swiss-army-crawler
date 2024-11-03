@@ -78,10 +78,10 @@ def get_files_in_path (dir_path: str, is_recursive: bool = False, depth: int = -
   Returns:
     list[str]: A list containing the paths of all the files found 
   """
-  logger.info('Getting all file paths to scan ...')
   check_starting_parameters_validity(dir_path, depth, excluded_directories)
 
   folder_paths = get_folders_in_path(dir_path, is_recursive, depth, excluded_directories)
+  logger.info('Getting all file paths to scan ...')
   file_paths = []
   for folder_path in folder_paths:
     file_paths.extend(get_files_paths_in_directory(folder_path))

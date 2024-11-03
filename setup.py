@@ -1,16 +1,15 @@
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 import subprocess
-import sys 
 
 class InstallConfigs(install):
     """Custom installation to run configuration script after install."""
-    
+
     def run(self):
-        install.run(self)
-        
+
         print("Running configuration script...")
-        subprocess.check_call([sys.executable,'-m', 'swiss_army_crawler.configure', 'configure'])
+        subprocess.call(['python','-m','swiss_army_crawler.configure'])
+        install.run(self)
     
 
 setup(
