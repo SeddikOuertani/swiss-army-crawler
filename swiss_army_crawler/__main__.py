@@ -13,5 +13,6 @@ def main():
   export_metadata(files_metadata)
   
   logger.info('Scan finished.')
+  
 if __name__ == "__main__":
   main()

@@ -5,26 +5,24 @@ from swiss_army_crawler import LOGLEVELS
 
 config_file_path = os.path.join(os.path.expanduser("~"), ".swiss_army_crawler_config.json")
 
-def configure():
-    settings = {
-       "log_dir": os.path.join(os.path.expanduser("~"), "swiss_army_crawler/swiss_army_crawler_config.json"),
-       "log_level": LOGLEVELS.DEBUG.name,
-       "target_dir": os.path.join(os.path.expanduser("~"), "swiss_army_crawler_output"), 
-    }
+def configure(is_default = True):
+    config_file_exists = Path(config_file_path).is_file()
+    if is_default and not config_file_exists: 
+      settings = {
+        "log_dir": os.path.join(os.path.expanduser("~"), "swiss_army_crawler/swiss_army_crawler_config.json"),
+        "log_level": LOGLEVELS.DEBUG.name,
+        "target_dir": os.path.join(os.path.expanduser("~"), "swiss_army_crawler_output"), 
+      }
 
-    isConfigureInp = 'N'
-    while True:
-      isConfigureInp = input("Configure swiss_army_crawler? (Y/N): ")
+      # Save the settings to a config file
+      with open(config_file_path, 'w') as config_file:
+          json.dump(settings, config_file, indent=4)
       
-      # Ensure input is valid
-      if isConfigureInp and isConfigureInp.capitalize() in ['Y', 'N']:
-          break  # Valid input, exit the loop
-      print("Invalid input, please enter 'Y' or 'N'.")
-    
-          
-    isConfigure = isConfigureInp.capitalize() == 'Y'
-    
-    if isConfigure:
+      print(f"Configuration saved to {config_file_path}")
+      print('\nconfigurations:\n{}'.format('\n'.join([f'{key} : {value}' for key, value in settings.items()])))
+
+    elif not is_default:
+      settings = {}
       while True:
         output_dir = input("Output folder (absolute path): ")
         if not output_dir or output_dir is None:
@@ -54,13 +52,13 @@ def configure():
         else:
           settings['log_level'] = log_level
           break 
-        
+          # Save the settings to a config file
+      with open(config_file_path, 'w') as config_file:
+          json.dump(settings, config_file, indent=4)
+      
+      print(f"Configuration saved to {config_file_path}")
       print('\nconfigurations:\n{}'.format('\n'.join([f'{key} : {value}' for key, value in settings.items()])))
-    else:
-      print('\nKeeping default configurations:\n{}'.format('\n'.join([f'{key} : {value}' for key, value in settings.items()])))
 
-    # Save the settings to a config file
-    with open(config_file_path, 'w') as config_file:
-        json.dump(settings, config_file, indent=4)
-    
-    print(f"Configuration saved to {config_file_path}")
+  
+if __name__ == "__main__":
+  configure()
