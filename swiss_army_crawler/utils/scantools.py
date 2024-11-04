@@ -8,10 +8,9 @@ from .texttools import get_text_file_metadata
 from .probetools import get_files_in_path, check_starting_parameters_validity
 from .imagetools import get_image_file_metadata  
 from .videotools import get_video_file_metadata
-from .loggingtools import Logger, LOGLEVELS
 
 module_name  = 'scantools'
-logger = Logger(LOGLEVELS.DEBUG, log_to_file=True)
+
 
 def get_file_count_by_type (dir_path: str, is_recursive: bool = False, depth: int = -1, excluded_directories: list[str] = []) -> str:
   """
@@ -55,10 +54,10 @@ def get_file_metadata (file_path: Path) -> dict:
   """
 
   metadata = {}
-  
+
   file_general_info = get_file_general_info(file_path)
   metadata = {**metadata, **file_general_info}
-  
+
   if metadata['type'].startswith('ASCII') or metadata['type'].__contains__('text'):
     file_stats = get_text_file_metadata(file_path)
     metadata = {**metadata, **file_stats}
@@ -67,7 +66,7 @@ def get_file_metadata (file_path: Path) -> dict:
   if metadata['type'].startswith('image'):
     image_info = get_image_file_metadata(file_path)
     metadata = {**metadata, **image_info}
-  
+
   # If the file is an video
   if metadata['type'].startswith('video'):
     video_info = get_video_file_metadata(file_path)
@@ -89,7 +88,6 @@ def get_all_files_metadata(dir_path: str, is_recursive: bool = False, depth: int
   ### Returns:
     dict: contains file info (name, size, last update date, creation date, etc...) 
   """
-  logger.info("Starting scan ...")
   all_files = get_files_in_path(dir_path, is_recursive, depth, excluded_directories)
   all_metadata = []
 
@@ -120,7 +118,7 @@ def get_file_general_info(file_path: Path) -> dict:
   metadata['creation_time'] = os.path.getctime(file_path.as_posix())  # Creation time
   mime = magic.Magic(mime=True)
   metadata['type'] = mime.from_file(str(file_path))  # File type  
-  
+
   # Get file status
   file_stat = os.stat(file_path.as_posix())
   metadata["owner_id"] = file_stat.st_uid  # User ID of the owner

@@ -1,12 +1,11 @@
 import argparse
-from .loggingtools import Logger, LOGLEVELS
+import os
 
 module_name = "logging_module"
-logger = Logger(LOGLEVELS.DEBUG, log_to_file=True)
 
-def parse_arguments () -> argparse.Namespace:
+def parse_main_arguments () -> argparse.Namespace:
   """
-  parse_arguments () -> Namespace
+  parse_main_arguments () -> Namespace
   
   Returns a `Namespace` object containing arguments and their values
 
@@ -14,11 +13,9 @@ def parse_arguments () -> argparse.Namespace:
     Namespace: 
   """
 
-  logger.info('Parsing arguments ...')
-
   parser = argparse.ArgumentParser(description="this tool helps you navigate metadata for files in a folder tree")
   
-  # defins the path of the search
+  # defines the path of the search
   parser.add_argument(
     "-p",
     "--path", 
@@ -58,3 +55,46 @@ def parse_arguments () -> argparse.Namespace:
 
   args = parser.parse_args()  
   return args
+
+def parse_config_arguments () -> argparse.Namespace:
+  """
+  parse_config_arguments () -> Namespace
+  
+  Returns a `Namespace` object containing config's arguments and their values
+
+  Returns
+    Namespace: 
+  """
+
+  parser = argparse.ArgumentParser(description="this tool helps you navigate metadata for files in a folder tree")
+
+  # defines the logs folder
+  parser.add_argument(
+    "-lf",
+    "--log_folder", 
+    type=str,
+    default=os.path.join(os.path.expanduser("~"), ".swiss_army_crawler/logs/"),
+    help="path of logs folder"
+  )
+
+  # defines the log level
+  parser.add_argument(
+    "-ll",
+    "--log_level", 
+    type=str,
+    default="DEBUG",
+    help="log level"
+  )
+
+  # defines the log level
+  parser.add_argument(
+    "-of",
+    "--output_folder", 
+    type=str,
+    default=os.path.join(os.path.expanduser("~"), ".swiss_army_crawler/output/"),
+    help="log level"
+  )
+
+  args = parser.parse_args()  
+  return args
+  

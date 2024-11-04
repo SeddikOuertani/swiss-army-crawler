@@ -1,13 +1,11 @@
 from setuptools import setup, find_packages
 from setuptools.command.install import install
-from swiss_army_crawler import configure
-import sys
 
 class InstallConfigs(install):
     """Custom installation to run configuration script after install."""
     def run(self):
         super().run()
-        print("Installation complete, please run \"swiss configure\" if you want to configure 'swiss army crawler'")
+        print("Installation complete, please run \"swiss_configure\" if you want to configure 'swiss army crawler'")
 
 setup(
     name='swiss-army-crawler',  # Replace with your package name
@@ -22,14 +20,14 @@ setup(
       "langdetect==1.0.9",
       "python-dotenv==1.0.1",
       "ffmpeg-python==0.2.0"
-      ],
+    ],
     cmdclass={
       "install": InstallConfigs  
     },
     entry_points={
       'console_scripts': [
-        'swiss=swiss_army_crawler.__main__:main'
-        'swiss configure=swiss_army_crawler.__configure__:configure'
+        'swiss=swiss_army_crawler.__main__:main',
+        'swiss_configure=swiss_army_crawler.__configure__:configure'
       ],
     },
     author='Mohamed Seddik OUERTANI',

@@ -6,7 +6,7 @@ from .misctools import SingletonMeta
 
 load_dotenv()
 
-log_file = os.getenv('LOG_DIR')
+log_file = os.path.join(os.path.expanduser("~"), ".swiss_army_crawler_config.json")
 
 # loggin
 class LOGLEVELS(enum.Enum):

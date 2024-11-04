@@ -1,4 +1,4 @@
-from .arguments import parse_arguments
+from .arguments import parse_main_arguments, parse_config_arguments
 from .imagetools import get_image_file_metadata
 from .videotools import get_video_file_metadata
 from .texttools import detect_hyperlinks, detect_languages, get_line_distribution, get_word_distribution, get_word_frequency, get_text_file_metadata
