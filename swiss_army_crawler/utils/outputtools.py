@@ -6,7 +6,6 @@ logger = Logger(LOGLEVELS.DEBUG, log_to_file=True)
 
 def export_metadata (files_metadata: list[dict]) -> None:
 
-  logger.info("exporting data ...")
   
   field_names = list(set([key for file_metadata in files_metadata for key in file_metadata.keys()]))
   text_files_metadata = [file for file in files_metadata if file['type'].startswith('text')]

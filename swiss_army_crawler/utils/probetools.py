@@ -1,9 +1,7 @@
 from pathlib import Path
 from .misctools import check_starting_parameters_validity 
-from .loggingtools import Logger, LOGLEVELS
 
 module_name = 'probing_module'
-logger = Logger(LOGLEVELS.DEBUG, log_to_file=True)
 
 def get_folders_in_path (dir_path: str, is_recursive: bool = False, depth: int= -1, excluded_directories: list[str] = []) -> list[str] :
   """
@@ -20,7 +18,6 @@ def get_folders_in_path (dir_path: str, is_recursive: bool = False, depth: int= 
   ### Returns:
     list of str: A list containing the paths of all the folders found 
   """
-  logger.info('Scanning all folder paths ...')
 
   check_starting_parameters_validity(dir_path, depth)
   
@@ -78,7 +75,6 @@ def get_files_in_path (dir_path: str, is_recursive: bool = False, depth: int = -
   Returns:
     list[str]: A list containing the paths of all the files found 
   """
-  logger.info('Getting all file paths to scan ...')
   check_starting_parameters_validity(dir_path, depth, excluded_directories)
 
   folder_paths = get_folders_in_path(dir_path, is_recursive, depth, excluded_directories)
